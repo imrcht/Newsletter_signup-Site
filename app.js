@@ -64,8 +64,9 @@ app.post("/failure", (req, res) =>{
 
 
 
-app.listen(7000, ()=> {
-    console.log(`Listening to 7000.`);
+app.listen(process.env.PORT || 7000, ()=> {
+    if (process.env.PORT) console.log(`Listening to port ${process.env.PORT}`);
+    else console.log("Listening to port 7000");
 })
 
 
@@ -75,8 +76,5 @@ app.listen(7000, ()=> {
 
 
 
-// api key
-// 0e413cfe52b06f3a1174e4708bf3f3c0-us6
 
-// aud id
 // f6a5002c02
