@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const https = require("https");
+const secret_key = require("./secret");
 
 
 app.use(express.static("public"));
@@ -29,10 +30,10 @@ app.post("/", (req, res) => {
         ]
     };
     jsondata = JSON.stringify(data);
-    const url = "https://us6.api.mailchimp.com/3.0/lists/";
+    const url = `https://us6.api.mailchimp.com/3.0/lists/${secret_key.aud_id}`;
     const options = {
         method: "POST",
-        auth: "Rach:",
+        auth: secret_key.auth_key
     }
 
     const request = https.request(url, options, (response) =>{
@@ -60,10 +61,6 @@ app.post("/failure", (req, res) =>{
     res.redirect("/")
 })
 
-
-
-
-
 app.listen(process.env.PORT || 7000, ()=> {
     if (process.env.PORT) console.log(`Listening to port ${process.env.PORT}`);
     else console.log("Listening to port 7000");
@@ -72,9 +69,3 @@ app.listen(process.env.PORT || 7000, ()=> {
 
 
 
-
-
-
-
-
-// f6a5002c02
